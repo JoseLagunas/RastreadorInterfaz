@@ -117,7 +117,7 @@ private Component confirmation;
     }// </editor-fold>//GEN-END:initComponents
 
     private void ingresarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ingresarMouseClicked
-       interfaz acceso = new interfaz();
+       rastreo acceso = new rastreo();
        acceso.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_ingresarMouseClicked
