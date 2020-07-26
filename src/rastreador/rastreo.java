@@ -1,6 +1,15 @@
 
 package rastreador;
+import javax.swing.JFrame;
+import javax.swing.SwingUtilities;
+import javax.swing.WindowConstants;
 
+import org.jfree.chart.ChartFactory;
+import org.jfree.chart.ChartPanel;
+import org.jfree.chart.JFreeChart;
+import org.jfree.data.xy.XYDataset;
+import org.jfree.data.xy.XYSeries;
+import org.jfree.data.xy.XYSeriesCollection;
 import com.teamdev.jxmaps.swing.MapView;
 import javax.swing.JFrame;
 import com.teamdev.jxmaps.*;
@@ -82,6 +91,11 @@ public class rastreo extends javax.swing.JFrame {
         });
 
         jButton4.setText("MODIFICAR DATOS");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
 
         jLabel1.setText("RASTREO DE ANIMAL");
 
@@ -139,7 +153,8 @@ public class rastreo extends javax.swing.JFrame {
     private void loc1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loc1ActionPerformed
         Mapa ini = new Mapa("UBICACION DEL ANIMAL");
        ini.setVisible(true);
-        this.dispose();
+        
+        
     }//GEN-LAST:event_loc1ActionPerformed
 
     private void salirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salirActionPerformed
@@ -149,10 +164,19 @@ public class rastreo extends javax.swing.JFrame {
     private void historialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_historialActionPerformed
      
         
-        Historial k = new Historial("HISTORIAL DE MOVIMIENTO");
-       k.setVisible(true);
-        this.dispose();
+         
+         Historial example = new Historial("HISTORIAL DE MOVIMIENTO");
+         example.setSize(700, 500);
+         example.setLocationRelativeTo(null);
+         example.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+         example.setVisible(true);
     }//GEN-LAST:event_historialActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        modificar uno = new modificar();
+        uno.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_jButton4ActionPerformed
 
    
     public static void main(String args[]) {

@@ -1,66 +1,77 @@
-
 package rastreador;
 
-import com.teamdev.jxmaps.swing.MapView;
 import javax.swing.JFrame;
-import com.teamdev.jxmaps.*;
-import java.awt.BorderLayout;
+import javax.swing.SwingUtilities;
+import javax.swing.WindowConstants;
 
-public class Historial extends MapView 
-{
-    private Map map2;
-    private Map map;
-    public Historial(String nName)
-    {
-    JFrame frame = new JFrame (nName);
-   
-     setOnMapReadyHandler(new MapReadyHandler() {
-            @Override
-            public void onMapReady(MapStatus status) {
-             if(status == MapStatus.MAP_STATUS_OK)
-             {
-              map2=getMap();
-              map=getMap();
-              
-              MapOptions mapOptions = new MapOptions();
-              MapTypeControlOptions controlOptions = new MapTypeControlOptions();
-             mapOptions.setMapTypeControlOptions(controlOptions);
-             
-             map.setOptions(mapOptions);
-             map.setCenter(new LatLng( 18.628227, -99.166870));
-             map.setZoom(18.0);
-             
-             map2.setOptions(mapOptions);
-             map2.setCenter(new LatLng( 18.628286, -99.166809));
-             map2.setZoom(18.0);
-            
-             
-             Marker mark = new Marker(map);
-             mark.setPosition(map.getCenter());
-             Marker mark1 = new Marker(map2);
-            mark1.setPosition(map2.getCenter());
-            
-             }
-                
-                
-                
-            }
-        });
+import org.jfree.chart.ChartFactory;
+import org.jfree.chart.ChartPanel;
+import org.jfree.chart.JFreeChart;
+import org.jfree.data.xy.XYDataset;
+import org.jfree.data.xy.XYSeries;
+import org.jfree.data.xy.XYSeriesCollection;
+
+/**
+ * @author imssbora
+ *
+ */
+public class Historial extends JFrame {
+
+   private static final long serialVersionUID = 1L;
+
+   public Historial(String title) {
+      super(title);
+      
+      // Create dataset
+      XYDataset dataset = getXYDataset();
+    
+      // Create chart
+      JFreeChart chart = ChartFactory.createPolarChart(
+            "RASTREADOR HISTORIAL   | MOVIMIENTOS", // Chart title
+            dataset,
+            true,
+            true,
+            false
+            );
+
+      ChartPanel panel = new ChartPanel(chart);
+      panel.setMouseZoomable(false);
+      setContentPane(panel);
+   }
+
+   private XYDataset getXYDataset() {
      
-      frame.add(this,BorderLayout.CENTER);
-      frame.setSize(700,500);
-      frame.setVisible(true);
-     
-    }
-    
-    
-    
-    
-    
-    
-    
-public static void main(String args[]) {
-        Historial ob = new Historial("Localizacion del animal");
-    }
-   
+      XYSeriesCollection dataset = new XYSeriesCollection();
+
+      XYSeries series1 = new XYSeries("LENGUAJES DE INTERFAZ");
+      series1.add(35, 45);
+      series1.add(145, 120);
+      series1.add(90, 150);
+      series1.add(90, 45);
+      series1.add(145, 140);
+      series1.add(54, 175);
+       series1.add(275, 183);
+       series1.add(220, 119);
+       series1.add(25, 45);
+      series1.add(15, 120);
+      series1.add(90, 150);
+      series1.add(10, 45);
+      series1.add(155, 140);
+      series1.add(341, 175);
+       series1.add(275, 183);
+       series1.add(220, 119);
+      dataset.addSeries(series1);
+      
+      return dataset;
+   }
+
+   public static void main(String[] args) {
+      SwingUtilities.invokeLater(() -> {
+         Historial example = new Historial("HISTORIAL DE MOVIMIENTO");
+         example.setSize(700, 500);
+         example.setLocationRelativeTo(null);
+         example.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+         example.setVisible(true);
+      });
+   }
 }
