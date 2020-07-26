@@ -6,17 +6,20 @@ import javax.swing.JFrame;
 import com.teamdev.jxmaps.*;
 import java.awt.BorderLayout;
 
-public class Mapa extends MapView 
+public class Historial extends MapView 
 {
+    private Map map2;
     private Map map;
-    public Mapa(String nName)
+    public Historial(String nName)
     {
     JFrame frame = new JFrame (nName);
+   
      setOnMapReadyHandler(new MapReadyHandler() {
             @Override
             public void onMapReady(MapStatus status) {
              if(status == MapStatus.MAP_STATUS_OK)
              {
+              map2=getMap();
               map=getMap();
               
               MapOptions mapOptions = new MapOptions();
@@ -27,15 +30,16 @@ public class Mapa extends MapView
              map.setCenter(new LatLng( 18.628227, -99.166870));
              map.setZoom(18.0);
              
+             map2.setOptions(mapOptions);
+             map2.setCenter(new LatLng( 18.628286, -99.166809));
+             map2.setZoom(18.0);
+            
+             
              Marker mark = new Marker(map);
              mark.setPosition(map.getCenter());
-             Circle circle = new Circle(map);
-             circle.setCenter(map.getCenter());
-             circle.setRadius(5);
-             CircleOptions co = new CircleOptions();
-             co.setFillColor("#FC5531" );
-             co.setFillOpacity(0.25);
-             circle.setOptions(co);
+             Marker mark1 = new Marker(map2);
+            mark1.setPosition(map2.getCenter());
+            
              }
                 
                 
@@ -48,8 +52,15 @@ public class Mapa extends MapView
       frame.setVisible(true);
      
     }
+    
+    
+    
+    
+    
+    
+    
 public static void main(String args[]) {
-        Mapa ob = new Mapa("Localizacion del animal");
+        Historial ob = new Historial("Localizacion del animal");
     }
    
 }
